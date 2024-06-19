@@ -1,0 +1,7 @@
+{
+  "name": "BusApplication",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
