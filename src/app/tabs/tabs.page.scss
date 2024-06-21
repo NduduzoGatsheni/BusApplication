@@ -1,1 +1,10 @@
-
+ion-tab-bar{
+    --background:rgb(253, 57, 17) !important;
+}
+i,ion-icon{
+    font-size:40px;
+    color:black;
+}
+i:hover,ion-icon:hover{
+    color:white;
+}
