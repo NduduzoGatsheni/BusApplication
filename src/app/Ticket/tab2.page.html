@@ -1,11 +1,40 @@
 
 <ion-content [fullscreen]="true">
-  <ion-card class="image">
-    <ion-card-title>
+  <div class="image">
+    <h5>
       Ticket Booked
-    </ion-card-title>
+    </h5>
 
-  </ion-card>
+  </div>
+  <div class="main-container">
+   
+    <ion-label>Student Number: </ion-label> <ion-label> {{ studentNumber }} </ion-label><hr/>
+    <ion-label>Name: </ion-label>  <ion-label>{{ studentName }} </ion-label><hr/>
+    <ion-label>Surname:  </ion-label> <ion-label>{{ studentSurname }} </ion-label><hr/>
+    <ion-label>From:  </ion-label> <ion-label> {{ fromTime }}  </ion-label> <hr/>
+    <ion-label> To: </ion-label> <ion-label> {{ toTime }} </ion-label><hr/>
+    <ion-label>Message: </ion-label> <ion-label> {{ message }} </ion-label><hr/>
+
+  </div>
 
 
 </ion-content>
+
+
+<!-- <ion-card>
+  <ion-card-header>
+    <ion-card-title>Student Information</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content> -->
+    <!-- <ion-item>
+      <ion-label>
+        <h2>Student Number: {{ studentNumber }}</h2>
+        <h3>Name: {{ studentName }}</h3>
+        <h3>Surname: {{ studentSurname }}</h3>
+        <p>From: {{ fromTime }} - To: {{ toTime }}</p>
+        <p>Message: {{ message }}</p>
+      </ion-label>
+    </ion-item> -->
+  <!-- </ion-card-content>
+</ion-card> -->
