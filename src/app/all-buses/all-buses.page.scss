@@ -1,0 +1,99 @@
+
+ion-header {
+    
+    --color: white; 
+    background-color: orangered;
+    
+}
+
+ion-toolbar {
+    
+    --background: orangered;
+    --color: white; 
+    
+}
+
+ion-title {
+    --color: white; 
+    
+}
+
+ion-label{
+    
+    font-size: 21px;
+    font-weight: bold;
+    
+}
+ion-card{
+   
+    border: solid;
+    border-color: orangered;
+    background-color: white;
+    color: black;
+    
+}
+
+ion-card-content{
+    color: orangered;
+    font-size: 17px;
+}
+
+ion-card-title span{
+    color: orangered;
+    
+}
+
+ion-label{
+    color: orangered;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.navbar {
+    background-color: orangered;
+    color: white;
+    padding: 10px;
+  }
+  
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .navbar ul li {
+    display: inline-block; /* Display list items horizontally */
+    margin-right: 10px;
+  }
+  
+  .navbar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+  }
+  
+  .navbar ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+  }
+  
+
+  .header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Ensures full height alignment */
+  }
+  
+  .header-content ion-title {
+    text-align: center; /* Center align text within ion-title */
+    color: white; /* Example: Set text color */
+    margin: 5px 0; /* Example: Adjust vertical spacing */
+  }
+  
+  ion-header {
+    --background: orangered; /* Example: Set header background */
+  }
+  

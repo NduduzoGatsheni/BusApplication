@@ -1,0 +1,43 @@
+
+ion-header {
+    
+    --color: white; 
+    background-color: orangered;
+}
+
+ion-toolbar {
+    
+    --background: orangered;
+    --color: white; 
+    
+}
+
+ion-title {
+    --color: white; 
+}
+
+
+ion-card{
+   
+    border: none;
+    border-color: orangered;
+    background-color: rgb(156, 148, 148);
+    color: black;
+    
+}
+
+ion-card-content{
+    color: orangered;
+    font-size: 17px;
+}
+
+ion-card-title span{
+    color: orangered;
+    
+}
+
+ion-label{
+    color: orangered;
+    font-size: 17px;
+    font-weight: bold;
+}
