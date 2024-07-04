@@ -1,28 +1,21 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
-  <div class="login-container">
-    <img src="assets/bus200.png" alt="App Logo" class="logo">
+<div class="login-container">
 
-    <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
-    </ion-item>
+<img src="assets/logo.png" alt="App Logo" class="logo">
+<div class="login">
+<h3>Welcome to Our Bus Application</h3>
+<h3>Log-In Page</h3>
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
-
-    <ion-button expand="block" (click)="login()">Login</ion-button>
-
-    <div class="links">
-      <a href="#" (click)="forgotPassword()">Forgot Password?</a>
-      <a href="#" (click)="signUp()">Sign Up</a>
-    </div>
-  </div>
+<ion-label>Username</ion-label>
+<ion-input type="text" [(ngModel)]="username"></ion-input>
+<ion-label>Password</ion-label>
+<ion-input type="password" [(ngModel)]="password"></ion-input>
+<ion-button expand="full" (click)="login()">Login</ion-button>
+<ion-button expand="full"(click)="signUp()">Regist</ion-button>
+<div class="links">
+<span>Forgot Password?</span><a href="#" (click)="forgotPassword()">Click Here</a>
+</div>
+</div>
+</div>
 </ion-content>
