@@ -34,10 +34,9 @@
     display:grid;
     grid-template-columns: 1fr 1fr;
     gap:5px;
-
 }
 .buttons ion-button:hover{
-    --background:rgb(252, 93, 35);
+  --background:rgb(252, 93, 35);
   }
   .links {
     margin-top: 20px;
