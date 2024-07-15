@@ -6,40 +6,39 @@
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    <ion-toolbar >
-      <!-- style="--background: orangered;" -->
+    <ion-toolbar>
       <ion-title size="large">BOOK</ion-title>
     </ion-toolbar>
   </ion-header>
-<div>
- 
-  <label style="margin: auto; font-size: 25px;">Book for a Bus</label>
-  
-  <ion-card class="form">
-    <div class="form-group">
+  <div>
+    <label style="margin: auto; font-size: 25px;">Book for a Bus</label>
+    <ion-card class="form">
+      <div class="form-group">
         <ion-label>Choose Time:</ion-label>
-        <select id="time" name="time">
-            <option value="10:00">10:00</option>
-            <option value="12:00">12:00</option>
-            <option value="14:00">14:00</option>
+        <select [(ngModel)]="time" name="time">
+          <option value="10:00">10:00</option>
+          <option value="12:00">12:00</option>
+          <option value="14:00">14:00</option>
         </select>
-    </div>
+      </div>
 
-    <div class="form-group">
+      <div class="form-group">
         <label>From:</label>
-        <label class="mutLabel">MUT</label>
-    </div>
-
-    <div class="form-group">
-        <label for="to">To:</label>
-        <select id="to" name="to">
-            <option value="Lonsdale">Lonsdale</option>
-            <option value="Beach">Beach Hotel</option>
-            <option value="Seaboard">Seaboard</option>
+        <select [(ngModel)]="from" name="from-to">
+          <option value="MUT">MUT</option>
+          <option value="Residence">Residence</option>
         </select>
-    </div>
-</ion-card>
-<ion-button>Submit</ion-button>
-</div>
-  
+      </div>
+
+      <div class="form-group">
+        <label for="to">To:</label>
+        <select [(ngModel)]="to" name="to">
+          <option value="Lonsdale">Lonsdale</option>
+          <option value="Beach">Beach Hotel</option>
+          <option value="Seaboard">Seaboard</option>
+        </select>
+      </div>
+    </ion-card>
+    <ion-button (click)="submitBooking()">Submit</ion-button>
+  </div>
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../Shared/data.service';
 
 @Component({
   selector: 'app-book',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookPage implements OnInit {
 
-  constructor() { }
+  time!:string;
+  from!: string;
+  to!: string;
 
-  ngOnInit() {
+  constructor(private firestoreService: DataService) {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
+  submitBooking() {
+    const bookingData = {
+      time: this.time,
+      from: this.from,
+      to: this.to
+    };
+
+    this.firestoreService.addBooking(bookingData)
+      .then(() => {
+        console.log('Booking successfully added!');
+      })
+      .catch(error => {
+        console.error('Error adding booking: ', error);
+      });
+  }
 }
