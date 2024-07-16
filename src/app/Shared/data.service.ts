@@ -11,4 +11,8 @@ export class DataService {
   addBooking(data: any) {
     return this.firestore.collection('booked').add(data);
   }
+
+  addBus(data: any) {
+    return this.firestore.collection('buses').add(data);
+  }
 }

@@ -1,0 +1,61 @@
+
+ion-header {
+    
+    --color: white; 
+    background-color: orangered;
+}
+
+ion-toolbar {
+    
+    --background: orangered;
+    --color: white; 
+    
+}
+
+ion-title {
+    --color: white; 
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group ion-label,
+.form-group label {
+    min-width: 100px; 
+    margin-right: 10px;
+}
+
+ion-card.form {
+    padding: 20px;
+    border: solid;
+    border-color: orangered;
+    background-color: rgb(156, 148, 148);
+    color: black;
+    height: auto;
+    font-size: 22px;
+}
+
+ion-card.form select {
+    flex: 1;
+}
+
+.mutLabel {
+    margin-left: 110px; /* Aligns with the label width and margin */
+}
+
+ion-button {
+    display: flex;
+    margin: 20px auto 0; /* Add top margin to separate from the form */
+    width: 350px;
+    --background: orangered;
+}
+
+.green-dot {
+    width: 30px;
+    height: 30px;
+    background: #00FF00;
+    border-radius: 50%;
+  }
