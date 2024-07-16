@@ -52,7 +52,7 @@ export class SignupPage implements OnInit {
       password: this.password,
     };
 
-    this.firestoreService.addBus(studentData)
+    this.firestoreService.addStudent(studentData)
       .then(() => {
         console.log('Student successfully added!');
       })
@@ -106,13 +106,8 @@ export class SignupPage implements OnInit {
       return;
     }
   
-    // register user if input is valid
-    const loader = await this.loadingController.create({
-      message: 'Signing up',
-      cssClass: 'custom-loader-class'
-    });
   
-    await loader.present();
+
     alert("Valid");
     this.auth.createUserWithEmailAndPassword(this.email, this.password)
       .then(async (userCredential: { user: any; }) => {

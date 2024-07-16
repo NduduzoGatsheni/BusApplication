@@ -17,6 +17,10 @@ export class DataService {
     return this.firestore.collection('buses').add(data);
   }
 
+  addStudent(data: any) {
+    return this.firestore.collection('registeredStudents').add(data);
+  }
+
   addProfile(data: any) {
     return this.firestore.collection('students').add(data);
   }
