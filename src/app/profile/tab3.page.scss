@@ -1,0 +1,22 @@
+.image{
+    height: 40%;
+    background-image: url(/assets/Screenshot__8_-removebg-preview.png);
+    background-position: center;
+    background-size: 100% 100%;
+    filter: brightness(80%);
+}
+.image h5{
+    font-size: 25px;
+    color: orangered;
+    text-align:center;
+    padding-top: 10px;
+    font-weight: bold;
+    font-style: italic;
+}
+.main-container{
+    background-color: rgb(191,189,189);
+    border: 3px solid orangered;
+    padding: 15px;
+    padding-bottom: 0;
+    margin: 0 20px 10px 20px;
+}
