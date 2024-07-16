@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,5 +15,9 @@ export class DataService {
 
   addBus(data: any) {
     return this.firestore.collection('buses').add(data);
+  }
+
+  addProfile(data: any) {
+    return this.firestore.collection('students').add(data);
   }
 }
