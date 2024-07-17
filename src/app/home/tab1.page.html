@@ -12,7 +12,7 @@
 
 
 <div class="search_container">
-    <h3 class="time">15:04:50</h3>
+    <h3 class="time">{{ currentTime }}</h3>
     <!-- <br/> -->
 <ion-item class="item-for-search">
     <ion-icon name = "search-outline"></ion-icon>
@@ -23,184 +23,31 @@
 </div>
 <div class="my-container">
 <!-- card 1------------------------------------------- -->
-    <ion-card class="resident-buses">
-<div class="first-half">
-    <div class="left-container">
-<img src="/assets/bus.png" alt="">
-    </div>
-    <div class="right-container">
-        <p>MUT - Lonsdale Hotel</p>
-        <span>next: 10:00 - 10:30</span><br/>
-        <h6><span>Bus Number</span> <span style="float:right;padding-right:30px;">3212</span></h6>
-        <h6><span>Location</span> <span style="float:right;padding-right:30px;">Seme Hall</span></h6>
-    </div>
-</div>
-<div class="second-half">
-    <div>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-    </div>
-<span>36 seats left</span>
-
-</div>
-    </ion-card>
-
-<!-- card 1------------------------------------------- -->
-<ion-card class="resident-buses">
+<ion-card class="resident-buses" *ngFor="let bus of buses$ | async">
     <div class="first-half">
-        <div class="left-container">
+      <div class="left-container">
     <img src="/assets/bus.png" alt="">
-        </div>
-        <div class="right-container">
-            <p>MUT - Lonsdale Hotel</p>
-            <span>next: 10:00 - 10:30</span><br/>
-            <h6><span>Bus Number</span> <span style="float:right;padding-right:30px;">3212</span></h6>
-            <h6><span>Location</span> <span style="float:right;padding-right:30px;">Seme Hall</span></h6>
-        </div>
+      </div>
+      <div class="right-container">
+          <p>{{ bus.residence }}</p>
+          <span>next: {{ bus.time }}</span><br/>
+          <h6><span>Bus Number</span> <span style="float:right;padding-right:30px;">{{ bus.busNumber }}</span></h6>
+          <h6><span>Location</span> <span style="float:right;padding-right:30px;">Seme Hall</span></h6>
+      </div>
     </div>
     <div class="second-half">
-        <div>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-            <ion-icon name="star"></ion-icon>
-        </div>
-    <span>36 seats left</span>
+      <div>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+      </div>
+    <span>{{ bus.totalSeats }} seats left</span>
     
     </div>
-        </ion-card>
-
-
-        <!-- card 1------------------------------------------- -->
-    <ion-card class="resident-buses">
-        <div class="first-half">
-            <div class="left-container">
-        <img src="/assets/bus.png" alt="">
-            </div>
-            <div class="right-container">
-                <p>MUT - Lonsdale Hotel</p>
-                <span>next: 10:00 - 10:30</span><br/>
-                <h6><span>Bus Number</span> <span style="float:right;padding-right:30px;">3212</span></h6>
-                <h6><span>Location</span> <span style="float:right;padding-right:30px;">Seme Hall</span></h6>
-            </div>
-        </div>
-        <div class="second-half">
-            <div>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-            </div>
-        <span>36 seats left</span>
-        
-        </div>
-            </ion-card>
-            <!-- card 1------------------------------------------- -->
-    <ion-card class="resident-buses">
-        <div class="first-half">
-            <div class="left-container">
-        <img src="/assets/bus.png" alt="">
-            </div>
-            <div class="right-container">
-                <p>MUT - Lonsdale Hotel</p>
-                <span>next: 10:00 - 10:30</span><br/>
-                <h6><span>Bus Number</span> <span style="float:right;padding-right:30px;">3212</span></h6>
-                <h6><span>Location</span> <span style="float:right;padding-right:30px;">Seme Hall</span></h6>
-            </div>
-        </div>
-        <div class="second-half">
-            <div>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-            </div>
-        <span>36 seats left</span>
-        
-        </div>
-            </ion-card>
-            <!-- card 1------------------------------------------- -->
-    <ion-card class="resident-buses">
-        <div class="first-half">
-            <div class="left-container">
-        <img src="/assets/bus.png" alt="">
-            </div>
-            <div class="right-container">
-                <p>MUT - Lonsdale Hotel</p>
-                <span>next: 10:00 - 10:30</span><br/>
-                <h6><span>Bus Number</span> <span style="float:right;padding-right:30px;">3212</span></h6>
-                <h6><span>Location</span> <span style="float:right;padding-right:30px;">Seme Hall</span></h6>
-            </div>
-        </div>
-        <div class="second-half">
-            <div>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-            </div>
-        <span>36 seats left</span>
-        
-        </div>
-            </ion-card>
-            <!-- card 1------------------------------------------- -->
-    <ion-card class="resident-buses">
-        <div class="first-half">
-            <div class="left-container">
-        <img src="/assets/bus.png" alt="">
-            </div>
-            <div class="right-container">
-                <p>MUT - Lonsdale Hotel</p>
-                <span>next: 10:00 - 10:30</span><br/>
-                <h6><span>Bus Number</span> <span style="float:right;padding-right:30px;">3212</span></h6>
-                <h6><span>Location</span> <span style="float:right;padding-right:30px;">Seme Hall</span></h6>
-            </div>
-        </div>
-        <div class="second-half">
-            <div>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-            </div>
-        <span>36 seats left</span>
-        
-        </div>
-            </ion-card>
-            <!-- card 1------------------------------------------- -->
-    <ion-card class="resident-buses">
-        <div class="first-half">
-            <div class="left-container">
-        <img src="/assets/bus.png" alt="">
-            </div>
-            <div class="right-container">
-                <p>MUT - Lonsdale Hotel</p>
-                <span>next: 10:00 - 10:30</span><br/>
-                <h6><span>Bus Number</span> <span style="float:right;padding-right:30px;">3212</span></h6>
-                <h6><span>Location</span> <span style="float:right;padding-right:30px;">Seme Hall</span></h6>
-            </div>
-        </div>
-        <div class="second-half">
-            <div>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-                <ion-icon name="star"></ion-icon>
-            </div>
-        <span>36 seats left</span>
-        
-        </div>
-            </ion-card>
-
+      </ion-card>
+<!-- card 1------------------------------------------- -->
 
 
 

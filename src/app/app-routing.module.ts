@@ -33,12 +33,15 @@ const routes: Routes = [
   {
     path: 'all-buses',
     loadChildren: () => import('./all-buses/all-buses.module').then( m => m.AllBusesPageModule)
-  },  {
+  },
+  {
     path: 'add-bus',
     loadChildren: () => import('./add-bus/add-bus.module').then( m => m.AddBusPageModule)
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
   }
-
-
 ];
 @NgModule({
   imports: [
