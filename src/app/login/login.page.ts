@@ -27,6 +27,10 @@ export class LoginPage {
       this.navCtrl.navigateForward("/signUp");
     }
 
+    tab() {
+      this.navCtrl.navigateForward("/tab/tab1");
+    }
+
     forgotPassword() {
       this.navCtrl.navigateForward("/signUp");
     }
@@ -83,11 +87,7 @@ export class LoginPage {
         return;
       }
   
-      const loader = await this.loadingController.create({
-        message: 'Signing in',
-        cssClass: 'custom-loader-class'
-      });
-      await loader.present();
+
   
       this.auth.signInWithEmailAndPassword(this.email, this.password)
         .then((userCred) => {
@@ -110,21 +110,21 @@ export class LoginPage {
               .ref.where("email", "==", this.email.trim())
               .get()
               .then((querySnapshot) => {
-                loader.dismiss();
+                // loader.dismiss();
                 if (!querySnapshot.empty) {
-                  this.navCtrl.navigateForward("/add-bus");
+                  this.navCtrl.navigateForward("/tabs/tab1");
                 } else {
-                  this.navCtrl.navigateForward("/book");
+                  this.navCtrl.navigateForward("//tabs/tab1");
                 }
               })
               .catch((error) => {
-                loader.dismiss();
+                // loader.dismiss();
                 const errorMessage = error.message;
               });
           }
         })
         .catch(async (error) => {
-          loader.dismiss();
+          // loader.dismiss();
           const errorMessage = error.message;
           if (errorMessage === "Firebase: The password is invalid or the user does not have a password. (auth/wrong-password)." 
           || errorMessage === "Firebase: There is no user record corresponding to this identifier. The user may have been deleted. (auth/user-not-found).") {
