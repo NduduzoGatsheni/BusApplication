@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Bus } from '../Mode/bus.model'; // Import your Bus model
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,6 +37,13 @@ export class DataService {
         });
       })
     );
+  }
+  addStudent(data: any) {
+    return this.firestore.collection('registeredStudents').add(data);
+  }
+
+  addProfile(data: any) {
+    return this.firestore.collection('students').add(data);
   }
 }
 
