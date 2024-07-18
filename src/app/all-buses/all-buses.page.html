@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>all-buses</ion-title>
+    <ion-title>All Buses</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,12 +8,11 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <div class="header-content">
-        <ion-title size="large">MUT to Lonsdale</ion-title>
+        <ion-title size="large">Bus</ion-title>
         <ion-title size="large">10:00 - 10:30</ion-title>
       </div>
     </ion-toolbar>
-  
-   
+
     <nav class="navbar">
       <ul>
         <li><a href="#">Available 12</a></li>
@@ -22,65 +21,16 @@
       </ul>
     </nav>
   </ion-header>
-  
-  
 
- 
-<ion-label>Bookings</ion-label>
-  <ion-card>
+  <ion-label>Bookings</ion-label>
+  <ion-card *ngFor="let bus of busData">
     <ion-card-header>
-      <ion-card-title>Mr W.C Khumalo</ion-card-title>
+      <ion-card-title> Student Number: {{ bus.studentNumber }}</ion-card-title>
     </ion-card-header>
-  
     <ion-card-content>
-   Student Number: 22022011 <br>
-   Time: 10:00 <br>
-   Bus Booked: 1708
-
+      <br>
+      Time: {{ bus.time }} <br>
+      Bus Booked: {{ bus.busNumber }}
     </ion-card-content>
-  
   </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Mr W.C Khumalo</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-   Student Number: 22022011 <br>
-   Time: 10:00 <br>
-   Bus Booked: 1708
-
-    </ion-card-content>
-  
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Mr W.C Khumalo</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-   Student Number: 22022011 <br>
-   Time: 10:00 <br>
-   Bus Booked: 1708
-
-    </ion-card-content>
-  
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Mr W.C Khumalo</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
-   Student Number: 22022011 <br>
-   Time: 10:00 <br>
-   Bus Booked: 1708
-
-    </ion-card-content>
-  
-  </ion-card>
-
-
-  
 </ion-content>

@@ -21,21 +21,18 @@
           <option value="14:00">14:00</option>
         </select>
       </div>
-
       <div class="form-group">
-        <label>From:</label>
-        <select [(ngModel)]="from" name="from-to">
-          <option value="MUT">MUT</option>
-          <option value="Residence">Residence</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="to">To:</label>
-        <select [(ngModel)]="to" name="to">
-          <option value="Lonsdale">Lonsdale</option>
-          <option value="Beach">Beach Hotel</option>
-          <option value="Seaboard">Seaboard</option>
+        <label for="to">Destination:</label>
+        <select [(ngModel)]="residence" name="residence">
+          <option value="MUT - Lonsdale">MUT - Lonsdale</option>
+          <option value="MUT - Beach Hotel">MUT - Beach Hotel</option>
+          <option value="MUT - Seaboard">MUT - Seaboard</option>
+          <option value="MUT - WaterFront">MUT - WaterFront</option>
+          <option value="MUT - Melody hills">MUT - Melody hills</option>
+          <option value="MUT - Corner House">MUT - Corner House</option>
+          <option value="Lonsdale - MUT">Lonsdale - MUT</option>
+          <option value="Beach Hotel - MUT">Beach Hotel - MUT </option>
+          <option value="Seaboard - MUT">Seaboard - MUT</option>
         </select>
       </div>
     </ion-card>
