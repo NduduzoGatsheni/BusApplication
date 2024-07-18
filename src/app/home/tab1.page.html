@@ -3,7 +3,8 @@
 
 
 <ion-item class="header">
-    <ion-icon name="arrow-back-outline"></ion-icon>
+  <ion-icon name="arrow-back-outline" [routerLink]="['/login']"></ion-icon>
+
     <ion-icon name="notifications-outline" slot="end"></ion-icon>
 </ion-item>
 <ion-content fullscreen color="light">
@@ -23,7 +24,7 @@
 </div>
 <div class="my-container">
 <!-- card 1------------------------------------------- -->
-<ion-card class="resident-buses" *ngFor="let bus of buses$ | async">
+<ion-card class="resident-buses" *ngFor="let bus of buses$ | async" [routerLink]="['/book']">
     <div class="first-half">
       <div class="left-container">
     <img src="/assets/bus.png" alt="">

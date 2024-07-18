@@ -1,73 +1,50 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>book</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content [fullscreen]="true">
+  <div class="header">
+  <ion-icon name="arrow-back-outline" [routerLink]="['/dashboard']"></ion-icon>
+</div>
   <div class="top-container">
     <ion-label>Assign Buses</ion-label>
-    
   </div>
-
   <div>
-  
     <ion-card class="form">
-    
-
       <div class="form-group">
-        <label>Residence:</label>
-        <select [(ngModel)]="residence" name="from-to">
-          <option value="MUT - Lonsdale">MUT - Lonsdale</option>
-          <option value="MUT - Beach Hotel">MUT - Beach Hotel</option>
-          <option value="MUT - Seaboard">MUT - Seaboard</option>
-          <option value="MUT - WaterFront">MUT - WaterFront</option>
-          <option value="MUT - Melody hills">MUT - Melody hills</option>
-          <option value="MUT - Corner House">MUT - Corner House</option>
-          <option value="Lonsdale - MUT">Lonsdale - MUT</option>
-          <option value="Beach Hotel - MUT">Beach Hotel - MUT </option>
-          <option value="Seaboard - MUT">Seaboard - MUT</option>
-        </select>
+        <!-- <label>Residence:</label> -->
+          <ion-select [(ngModel)]="residence" label="Residence:" name="from-to" placeholder="Select Residence">
+            <ion-select-option value="MUT - Lonsdale">MUT - Lonsdale</ion-select-option>
+            <ion-select-option value="MUT - Beach Hotel">MUT - Beach Hotel</ion-select-option>
+            <ion-select-option value="MUT - Seaboard">MUT - Seaboard</ion-select-option>
+            <ion-select-option value="MUT - WaterFront">MUT - WaterFront</ion-select-option>
+            <ion-select-option value="MUT - Melody hills">MUT - Melody hills</ion-select-option>
+            <ion-select-option value="MUT - Corner House">MUT - Corner House</ion-select-option>
+            <ion-select-option value="Lonsdale - MUT">Lonsdale - MUT</ion-select-option>
+            <ion-select-option value="Beach Hotel - MUT">Beach Hotel - MUT</ion-select-option>
+            <ion-select-option value="Seaboard - MUT">Seaboard - MUT</ion-select-option>
+          </ion-select>
       </div>
       <div class="form-group">
-        <ion-label>Bus Number:</ion-label>
-        <input type="text" [(ngModel)]="busNumber">
+        <ion-input label="Bus Number" type="number" fill="solid" [(ngModel)]="busNumber"></ion-input>
       </div>
       <div class="form-group">
-        <ion-label>Total seats:</ion-label>
-        <input type="number" [(ngModel)]="totalSeats">
+        <ion-input label="Total seats:" type="number"  [(ngModel)]="totalSeats"></ion-input>
       </div>
-      <!-- <div class="form-group">
-        <ion-label>Date</ion-label>
-        <ion-datetime-button datetime="datetime"></ion-datetime-button>
-
-        <ion-modal [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime id="datetime" [(ngModel)]="date"></ion-datetime>
-          </ng-template>
-        </ion-modal>
-      </div> -->
-
       <div class="form-group">
-        <ion-label>Choose Time:</ion-label>
-        <select [(ngModel)]="time" name="time">
-          <option value="10:00">10:00</option>
-          <option value="12:00">12:00</option>
-          <option value="14:00">14:00</option>
-          <option value="17:00">17:00</option>
-          <option value="19:00">19:00</option>
-          <option value="21:00">21:00</option>
-        </select>
+          <ion-select [(ngModel)]="time" label="Choose Time:" name="time" placeholder="Select Time">
+            <ion-select-option value="07:00">07:00</ion-select-option>
+            <ion-select-option value="08:00">08:00</ion-select-option>
+            <ion-select-option value="09:00">09:00</ion-select-option>
+            <ion-select-option value="10:00">10:00</ion-select-option>
+            <ion-select-option value="10:30">10:30</ion-select-option>
+            <ion-select-option value="12:00">12:00</ion-select-option>
+            <ion-select-option value="12:30">12:30</ion-select-option>
+            <ion-select-option value="14:00">14:00</ion-select-option>
+            <ion-select-option value="15:00">15:00</ion-select-option>
+            <ion-select-option value="17:00">17:00</ion-select-option>
+            <ion-select-option value="19:00">19:00</ion-select-option>
+            <ion-select-option value="21:00">21:00</ion-select-option>
+          </ion-select>
       </div>
-
-      <!-- <div class="green-dot form-group">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#00FF00" d="m2 12a10 10 0 1 1 10 10 10 10 0 0 1 -10-10z"/>
-        </svg>
-        <ion-label>Available</ion-label>
-        <input type="checkbox" [(ngModel)]="availability">
-      </div> -->
     </ion-card>
-    <ion-button (click)="submitBus()">Submit</ion-button>
+    <ion-button (click)="submitBus()">{{ buttonText }}</ion-button>
+
   </div>
 </ion-content>

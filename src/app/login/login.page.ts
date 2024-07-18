@@ -26,11 +26,11 @@ export class LoginPage {
   ) {}
 
   signUp() {
-    this.navCtrl.navigateForward("/signUp");
+    this.navCtrl.navigateForward("/signup");
   }
 
   forgotPassword() {
-    this.navCtrl.navigateForward("/signUp");
+    this.navCtrl.navigateForward("/signup");
   }
 
   async validate() {
