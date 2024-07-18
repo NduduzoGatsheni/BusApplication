@@ -21,37 +21,20 @@
    <div class="s_container">
 <ion-item class="item-for-search">
   <ion-icon name = "search-outline"></ion-icon>
-  <ion-input for="search" class="search_input" name="search" placeholder="Search"></ion-input>
+  <ion-input [(ngModel)]="searchQuery" (ionInput)="onSearch()" for="search" class="search_input" name="search" placeholder="Search"></ion-input>
 </ion-item>
 </div>
 <div class="location">
-  <ion-label>Location:</ion-label>
-  <ion-input popover>
-      <option value="MUT - Lonsdale">MUT - Lonsdale</option>
-      <option value="MUT - Beach Hotel">MUT - Beach Hotel</option>
-      <option value="MUT - Seaboard">MUT - Seaboard</option>
-      <option value="MUT - WaterFront">MUT - WaterFront</option>
-      <option value="MUT - Melody hills">MUT - Melody hills</option>
-      <option value="MUT - Corner House">MUT - Corner House</option>
-      <option value="Lonsdale - MUT">Lonsdale - MUT</option>
-      <option value="Beach Hotel - MUT">Beach Hotel - MUT </option>
-      <option value="Seaboard - MUT">Seaboard - MUT</option>
-  </ion-input>
+  <!-- <ion-label>Location:</ion-label> -->
+  <ion-select [(ngModel)]="location" placeholder="Select Location" label="Pick Up Point:" (ngModelChange)="onChange($event)">
+    <ion-select-option value="Seme-Hall">Seme Hall</ion-select-option>
+    <ion-select-option value="North Campus">North Campus</ion-select-option>
+    <ion-select-option value="Main Campus Gate">Main Campus Gate</ion-select-option>
+  </ion-select>
+  
 </div>
 </div>
 <div class="my-container">
-
-  <!-- <ion-list>
-    <ion-item *ngFor="let bus of buses$ | async">
-      <ion-label>
-        <h2>{{ bus.busNumber }}</h2>
-        <p>{{ bus.residence }}</p>
-        <p>Date: {{ bus.date }}</p>
-        <p>Time: {{ bus.time }}</p>
-        <p>Total Seats: {{ bus.totalSeats }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list> -->
 
   <ion-card class="resident-buses" *ngFor="let bus of buses$ | async"  (click)="navigateToUpdate(bus)">
 <div class="first-half">
@@ -62,7 +45,7 @@
       <p>{{ bus.residence }}</p>
       <span>next: {{ bus.time }}</span><br/>
       <h6><span>Bus Number</span> <span style="float:right;padding-right:30px;">{{ bus.busNumber }}</span></h6>
-      <h6><span>Location</span> <span style="float:right;padding-right:30px;">Seme Hall</span></h6>
+      <h6><span>Pick Up Point</span> <span style="float:right;padding-right:30px;">{{location}}</span></h6>
   </div>
 </div>
 <div class="second-half">
