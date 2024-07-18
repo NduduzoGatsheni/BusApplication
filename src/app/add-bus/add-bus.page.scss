@@ -15,7 +15,11 @@ ion-toolbar {
 ion-title {
     --color: white; 
 }
-
+.header{
+    font-size:30px;
+    background-color: orangered;
+    color:white;
+}
 .form-group {
     display: flex;
     align-items: center;

@@ -14,7 +14,7 @@ export class BookPage implements OnInit {
 
   constructor(private firestoreService: DataService) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    // throw new Error('Method not implemented.');
   }
 
   submitBooking() {
