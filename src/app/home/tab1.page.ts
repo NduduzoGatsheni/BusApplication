@@ -18,9 +18,7 @@ export class Tab1Page {
   currentTime: string ='';
 
   constructor(private dataService: DataService, private datePipe: DatePipe) {
-    // this.currentTime = this.datePipe.transform(new Date(), 'shortTime');
   }
-  // constructor(private dataService: DataService) { }
 
   ngOnInit() {
 
