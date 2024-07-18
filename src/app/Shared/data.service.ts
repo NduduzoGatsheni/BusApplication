@@ -27,6 +27,10 @@ export class DataService {
     return this.firestore.collection('buses').add(data);
   }
 
+  updateBusSeats(busId: string, seats: number) {
+    return this.firestore.collection('buses').doc(busId).update({ totalSeats: seats });
+  }
+
   getBuses(): Observable<Bus[]> {
     return this.busesCollection.snapshotChanges().pipe(
       map(actions => {
@@ -43,7 +47,7 @@ export class DataService {
 
   getBusData() {
     return this.firestore.collection('buses').snapshotChanges();
-  }
+  }  
 
   addStudent(data: any) {
     return this.firestore.collection('registeredStudents').add(data);
