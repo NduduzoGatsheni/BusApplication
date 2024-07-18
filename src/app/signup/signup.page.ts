@@ -68,7 +68,10 @@ export class SignupPage implements OnInit {
         await loading.dismiss();
         if (userCredential.user) {
           await this.firestore.collection('registeredStudents').add({
-            email: this.email,
+            studentNumber: this.studentNumber,
+      fullName: this.fullName,
+      email: this.email,
+      password: this.password
           });
           // this.registerStudents();
           this.navController.navigateForward("login");
