@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren: () => import('./today/today.module').then( m => m.TodayPageModule)
   },
   {
-    path: 'all-buses',
+    path: 'bookings',
     loadChildren: () => import('./all-buses/all-buses.module').then( m => m.AllBusesPageModule)
   },
   {

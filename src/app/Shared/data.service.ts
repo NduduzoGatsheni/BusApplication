@@ -45,6 +45,10 @@ export class DataService {
     return this.firestore.collection('buses').snapshotChanges();
   }  
 
+  getTicketData() {
+    return this.firestore.collection('booked').snapshotChanges();
+  } 
+
   addStudent(data: any) {
     return this.firestore.collection('registeredStudents').add(data);
   }

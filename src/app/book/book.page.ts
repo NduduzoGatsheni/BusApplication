@@ -3,6 +3,8 @@ import { DataService } from '../Shared/data.service';
 import { map, Observable } from 'rxjs';
 import { Bus } from '../Mode/bus.model';
 import { UserService } from '../Shared/user.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-book',
@@ -17,12 +19,34 @@ export class BookPage implements OnInit {
   busData$!: Observable<Bus[]>;
 
   busData: any[] = [];
+  userData: any; // Store user data here
 
   constructor(private dataService: DataService,
-              private userService: UserService) {}
+              private userService: UserService,
+              private db: AngularFirestore,
+            private navCtrl: NavController) {}
 
   ngOnInit() {
     this.fetchBusData();
+    const email = this.userService.getCurrentUserEmail();
+    if (email) {
+      this.getUserData(email);
+    }
+  }
+
+  async getUserData(email: string) {
+    try {
+      const snapshot = await this.db.collection("registeredStudents").ref.where("email", "==", email).get();
+      if (!snapshot.empty) {
+        this.userData = snapshot.docs[0].data(); // Store user data
+        return this.userData;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      return null;
+    }
   }
 
   fetchBusData() {
@@ -37,6 +61,10 @@ export class BookPage implements OnInit {
     this.busData$.subscribe(data => {
       this.busData = data;
     });
+  }
+
+  nav() {
+    this.navCtrl.navigateForward("/tab/tab2");
   }
 
   async submitBooking() {
@@ -55,10 +83,12 @@ export class BookPage implements OnInit {
           time: this.time,
           residence: this.residence,
           busNumber: matchedBus.busNumber,
-          // email: email
+          email: email,
+          studentNumber: this.userData.studentNumber, 
         };
 
         await this.dataService.addBooking(bookingData);
+        this.nav();
         console.log('Booking successfully added!');
       } catch (error) {
         console.error('Error updating bus seats or adding booking: ', error);
