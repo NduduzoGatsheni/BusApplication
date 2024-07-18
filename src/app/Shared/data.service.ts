@@ -31,6 +31,13 @@ export class DataService {
       })
     );
   }
+
+ 
+
+  getBusData() {
+    return this.firestore.collection('buses').snapshotChanges();
+  }
+
   addStudent(data: any) {
     return this.firestore.collection('registeredStudents').add(data);
   }

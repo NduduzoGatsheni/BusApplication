@@ -6,14 +6,14 @@
     </h5>
 
   </div>
-  <div class="main-container">
+  <div class="main-container" *ngIf="userData">
    
-    <ion-label>Student Number: </ion-label> <ion-label> {{ studentNumber }} </ion-label><hr/>
-    <ion-label>Name: </ion-label>  <ion-label>{{ studentName }} </ion-label><hr/>
-    <ion-label>Surname:  </ion-label> <ion-label>{{ studentSurname }} </ion-label><hr/>
-    <ion-label>From:  </ion-label> <ion-label> {{ fromTime }}  </ion-label> <hr/>
-    <ion-label> To: </ion-label> <ion-label> {{ toTime }} </ion-label><hr/>
-    <ion-label>Message: </ion-label> <ion-label> {{ message }} </ion-label><hr/>
+    <ion-label>Student Number: </ion-label> <ion-label> {{ userData.studentNumber }} </ion-label><hr/>
+    <ion-label>Name: </ion-label>  <ion-label>{{ userData.fullName }} </ion-label><hr/>
+    <ion-label>Surname:  </ion-label> <ion-label> Ndlovu </ion-label><hr/>
+    <ion-label>From:  </ion-label> <ion-label> 10  </ion-label> <hr/>
+    <ion-label> To: </ion-label> <ion-label>  12  </ion-label><hr/>
+    <ion-label>Message: </ion-label> <ion-label>  On time  </ion-label><hr/>
 
   </div>
 

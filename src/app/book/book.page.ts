@@ -32,4 +32,8 @@ export class BookPage implements OnInit {
         console.error('Error adding booking: ', error);
       });
   }
+
+  getBusData(){
+    
+  }
 }
