@@ -6,7 +6,7 @@ import { Bus } from '../Mode/bus.model';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -20,7 +20,7 @@ export class DashboardPage implements OnInit {
   searchQuery: string = '';
   private searchTerms = new Subject<string>();
 
-  constructor(private dataService: DataService, private datePipe: DatePipe, private router: Router) { }
+  constructor(private dataService: DataService, private datePipe: DatePipe, private router: Router,private alertController: AlertController) { }
 
   ngOnInit() {
     this.fetchBuses(); // Fetch buses initially
@@ -44,18 +44,46 @@ export class DashboardPage implements OnInit {
     });
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Make An Announcement',
+      inputs: [
+        {
+          name: 'alertMessage',
+          type: 'text',
+          placeholder: 'Enter your announcement message',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Alert canceled');
+          },
+        },
+        {
+          text: 'Submit',
+          handler: (data) => {
+            this.submitAnnouncement(data.alertMessage);
+            console.log('Alert message:', data.alertMessage);
+            // Handle the alert message as needed
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+  clearSearch() {
+    this.searchQuery = '';
+    this.fetchBuses();
+}
   onSearch() {
     this.searchTerms.next(this.searchQuery.trim()); // emit search term to searchTerms Subject
   }
 
-  // searchBusesInArray(residence: string): Observable<Bus[]> {
-
-    
-  //   return this.buses$.pipe(
-  //     // Assuming buses$ is an array, filter based on residence
-  //     map((buses: any[]) => buses.filter(bus => bus.residence.toLowerCase().includes(residence.toLowerCase())))
-  //   );
-  // }
   searchBusesInArray(residence: string): Observable<Bus[]> {
     if (residence.trim() === '') {
       // If the search term is empty, return the original buses$
@@ -90,5 +118,18 @@ export class DashboardPage implements OnInit {
     }).catch(error => {
       console.error('Error adding or updating location:', error);
     });
+  }
+  submitAnnouncement(alertMessage: string) {
+    if (alertMessage) {
+      this.dataService.Announcement(alertMessage)
+        .then(() => {
+          console.log('Announcement updated successfully');
+        })
+        .catch((error) => {
+          console.error('Error updating announcement:', error);
+        });
+    } else {
+      console.error('Announcement message is empty');
+    }
   }
 }

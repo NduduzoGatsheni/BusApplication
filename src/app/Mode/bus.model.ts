@@ -5,7 +5,6 @@ export interface Bus {
     time: string;
     totalSeats: number;
     studentNumber?: number;
-    email?: string;
-    // Add other fields as per your data structure
+    email?: string; 
   }
   

@@ -30,6 +30,7 @@ export class BookPage implements OnInit {
     this.fetchBusData();
     const email = this.userService.getCurrentUserEmail();
     if (email) {
+      alert(email);
       this.getUserData(email);
     }
   }

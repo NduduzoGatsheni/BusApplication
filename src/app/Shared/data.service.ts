@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore,  AngularFirestoreCollection, QueryFn } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Bus } from '../Mode/bus.model'; // Import your Bus model
+import { Bus } from '../Mode/bus.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +19,10 @@ export class DataService {
     return this.firestore.collection('booked').add(data);
   }
 
-  
-
   updateBusSeats(busId: string, seats: number) {
     return this.firestore.collection('buses').doc(busId).update({ totalSeats: seats });
   }
 
-  // addBus(data: any) {
-  //   return this.firestore.collection('buses').add(data);
-  // }
   getBuses(): Observable<Bus[]> {
     return this.busesCollection.snapshotChanges().pipe(
       map(actions => {
@@ -39,6 +34,7 @@ export class DataService {
       })
     );
   }
+
   getBusData() {
     return this.firestore.collection('buses').snapshotChanges();
   }  
@@ -79,17 +75,12 @@ export class DataService {
         map((location: any) => location?.location as string)
       );
   }
-
-  // searchBuses(searchTerm: string): Observable<Bus[]> {
-  //   const queryFn: QueryFn = ref => ref.where('residence', '>=', searchTerm).where('name', '<=', searchTerm + '\uf8ff');
-  //   return this.firestore.collection<Bus>('Buses', queryFn).valueChanges();
-  // }
-
-
-
-  // searchBusesInArray(residence: string): Observable<Bus[]> {
-  //   return this.firestore.collection<Bus>('Buses', ref =>
-  //     ref.where('buses$', 'array-contains', { residence })
-  //   ).valueChanges();
-  // }
+  Announcement(announcement: string): Promise<void> {
+    if (!announcement) {
+      throw new Error('There is no announcement');
+    }
+    return this.firestore.collection("Announcement").doc('announcement4all').update({
+      announcement: announcement,
+    });
+  }
 }
