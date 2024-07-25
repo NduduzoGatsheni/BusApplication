@@ -5,6 +5,7 @@ import { Bus } from '../Mode/bus.model';
 import { UserService } from '../Shared/user.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-book',
@@ -17,14 +18,19 @@ export class BookPage implements OnInit {
   from!: string;
   residence!: string;
   busData$!: Observable<Bus[]>;
-
   busData: any[] = [];
   userData: any; // Store user data here
+  bus: any;
+  uid: any;
+  busNumber: any;
+  totalSeats: any;
+  buttonText: string | undefined;
 
   constructor(private dataService: DataService,
               private userService: UserService,
               private db: AngularFirestore,
-            private navCtrl: NavController) {}
+            private navCtrl: NavController,
+            private router: Router) {}
 
   ngOnInit() {
     this.fetchBusData();
@@ -33,6 +39,20 @@ export class BookPage implements OnInit {
       alert(email);
       this.getUserData(email);
     }
+    
+    const navigation = this.router.getCurrentNavigation();
+
+    if (navigation?.extras.state?.['bus']) {
+      this.bus = navigation.extras.state['bus'];
+      this.uid = this.bus.id
+      this.busNumber = this.bus.busNumber;
+      this.residence = this.bus.residence;
+      this.time = this.bus.time;
+      this.totalSeats = this.bus.totalSeats;
+
+      this.buttonText = 'Update'; // Change button text to 'Update'
+    }
+
   }
 
   async getUserData(email: string) {
@@ -65,11 +85,10 @@ export class BookPage implements OnInit {
   }
 
   nav() {
-    this.navCtrl.navigateForward("/tab/tab2");
+    this.navCtrl.navigateForward("/tabs/tab2");
   }
 
   async submitBooking() {
-    const email = this.userService.getCurrentUserEmail();
 
     const matchedBus = this.busData.find(bus => bus.residence === this.residence && bus.time === this.time);
 
@@ -84,7 +103,8 @@ export class BookPage implements OnInit {
           time: this.time,
           residence: this.residence,
           busNumber: matchedBus.busNumber,
-          email: email,
+          email: this.userData.email,
+          fullName: this.userData.fullName,
           studentNumber: this.userData.studentNumber, 
         };
 

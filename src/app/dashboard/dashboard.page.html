@@ -12,7 +12,6 @@
     <div>
       <ion-icon name="megaphone-outline" (click)="presentAlert()"></ion-icon>
 
-      <!-- <ion-icon name="megaphone-outline"></ion-icon> -->
         <ion-icon name="menu-outline" slot="end"></ion-icon>
     </div>
 </div>
@@ -44,7 +43,9 @@
 </div>
 <div class="my-container">
 
-  <ion-card class="resident-buses" *ngFor="let bus of buses$ | async"  (click)="navigateToUpdate(bus)">
+  <ion-card class="resident-buses" *ngFor="let bus of buses$ | async"  (click)="navigate(bus)">
+
+
 <div class="first-half">
   <div class="left-container">
 <img src="/assets/bus.png" alt="">
@@ -68,5 +69,13 @@
 
 </div>
   </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="floating-button" [routerLink]="['/add-bus']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+  <!-- <ion-button class="floating-button">Add</ion-button> -->
 </div>
 </ion-content>

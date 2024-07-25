@@ -83,4 +83,11 @@ export class DataService {
       announcement: announcement,
     });
   }
+
+  updateBusTime(busId: string, newTime: string) {
+    return this.firestore
+      .collection('buses')
+      .doc(busId)
+      .update({ time: newTime });
+  }
 }

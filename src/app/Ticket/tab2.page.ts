@@ -22,7 +22,9 @@ export class Tab2Page implements OnInit {
 
   ngOnInit() {
     this.currentUserEmail = this.userService.getCurrentUserEmail();
+
     if (this.currentUserEmail) {
+      // alert("my is marasha");
       this.fetchBusData();
     }
   }

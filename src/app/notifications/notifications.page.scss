@@ -1,0 +1,39 @@
+ion-content{
+  --background:rgb(255, 246, 248);
+}
+ion-card-title {
+    color: red;
+  }
+  
+  .bus-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .bus-info h2 {
+    color:black;
+    font-size: 1rem;
+    margin: 0;
+  }
+  
+  .bus-info h3 {
+    font-size: 1.5rem;
+    color: red;
+    margin: 0;
+  }
+  
+  ion-card-content p {
+    color: red;
+  }
+  .top-div{
+    background-color: orangered;
+    font-size: 30px;
+    padding: 10px;
+    display: flex;
+    color:white;
+    align-items: center;
+  }
+  .info-container{
+    background-color: rgb(226, 226, 226);
+  }

@@ -4,7 +4,9 @@ export interface Bus {
     residence: string;
     time: string;
     totalSeats: number;
+    fullName?:string,
     studentNumber?: number;
     email?: string; 
+    message?:string;
   }
   

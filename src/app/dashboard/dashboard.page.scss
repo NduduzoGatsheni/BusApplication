@@ -133,6 +133,38 @@ img{
 .my-container ion-card:hover{
     background-color: rgb(236, 225, 225);
 }
+.floating-button {
+    position: fixed;
+    bottom: 16px;  /* Adjust as needed */
+    right: 16px;   /* Adjust as needed */
+    width: 56px;   /* Adjust as needed */
+    height: 56px;  /* Adjust as needed */
+    border-radius: 50%;
+    --background: rgb(224, 0, 101);
+    background-color: rgb(224, 0, 101);  /* Adjust as needed */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensures the button is on top */
+  }
+//   ion-fab-button:hover,:active{
+//     --background: orangered;
+//     background-color: orangered; 
+//   }
+
+//   ion-fab:hover,:active{
+//     --background: orangered;
+//     background-color: orangered; 
+//   }
+
+  .floating-button:hover, .floating-button:active{
+    --background: orangered;
+    background-color: orangered; 
+  }
+
+
   @media (min-width: 768px) {
     .my-container ion-card {
       flex: 1 1 calc(50% - 20px);

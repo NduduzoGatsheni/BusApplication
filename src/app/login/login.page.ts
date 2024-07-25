@@ -81,10 +81,14 @@ export class LoginPage {
         if (userCred) {
           // Store the current user's email using the UserService
           this.userService.setCurrentUserEmail(this.email);
-
-          // Example of navigating to another page where user data can be used
+          
+        if(this.email === "admin.mutbuses@gmail.com"){
+          this.navCtrl.navigateForward("/dashboard");
+        }
+        else{
           this.navCtrl.navigateForward("/tabs/tab1");
         }
+       }
       })
       .catch(async (error) => {
         await loading.dismiss();

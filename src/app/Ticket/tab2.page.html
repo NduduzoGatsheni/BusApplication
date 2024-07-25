@@ -1,25 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>My Bookings</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">My Bookings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="image">
+    <h5>
+      Booked Ticket
+    </h5>
 
-  <ion-label>Bookings</ion-label>
-  <ion-card class="main-container" *ngFor="let bus of busData">
-    <ion-card-header>
-      Student Number: {{ bus.studentNumber }}
-    </ion-card-header>
-    <ion-card-content>
-      
-      Time: {{ bus.time }} <br>
-      Bus Booked: {{ bus.busNumber }}
-    </ion-card-content>
-  </ion-card>
+  </div>
+  <div class="main-container" *ngFor="let bus of busData">
+   
+    <ion-label>Student Number: </ion-label> <ion-label> {{ bus.studentNumber }} </ion-label><hr/>
+    <ion-label>Name: </ion-label>  <ion-label>{{ bus.fullName }} </ion-label><hr/>
+    <ion-label>Email:  </ion-label> <ion-label> {{ bus.email }}</ion-label><hr/>
+    <ion-label> Time: </ion-label> <ion-label> {{ bus.time }} </ion-label><hr/>
+    <ion-label>Route: </ion-label>  <ion-label>{{ bus.residence }} </ion-label><hr/>
+    <ion-label>Bus Booked:  </ion-label> <ion-label> {{ bus.busNumber }}</ion-label><hr/>
+    <ion-label>Message:  </ion-label> <ion-label> {{ bus?.message }}</ion-label><hr/>
+    <ion-button fill="block" style="margin-bottom:10px;"   onClick="cancelBooking()">Cancel</ion-button>
+  </div>
 </ion-content>
