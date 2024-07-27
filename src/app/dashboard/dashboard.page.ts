@@ -350,13 +350,6 @@ export class DashboardPage implements OnInit {
   //       });
   //     });
   //   }
-  
-
-
-
-  
-
-
   // navigateToUpdate(bus: Bus) {
   //   this.router.navigate(['/add-bus'], { state: { bus } });
   // }
@@ -388,25 +381,43 @@ export class DashboardPage implements OnInit {
 
   async navigate(bus: any) {
     const alert = await this.alertController.create({
-      header: 'Bus Options',
+      header: 'Details Options',
       buttons: [
         {
-          text: 'Update Bus',
+          text: 'Update Details',
+          cssClass: 'update-details-button',
           handler: () => {
             this.updateBus(bus);
           }
         },
         {
-          text: 'View Students',
+          text: 'View Bookings',
+          cssClass: 'view-bookings-button',
           handler: () => {
             this.viewStudents(bus);
           }
         }
       ]
     });
-
     await alert.present();
+  
+    // Apply CSS to insert icons
+    this.addIconsToAlertButtons();
   }
+  
+  addIconsToAlertButtons() {
+    const updateButton = document.querySelector('.update-details-button');
+    const viewButton = document.querySelector('.view-bookings-button');
+  
+    if (updateButton) {
+      updateButton.innerHTML = '<ion-icon style="color:green;" name="create-outline"></ion-icon><span style="color:green;"> Update Details</span>';
+    }
+  
+    if (viewButton) {
+      viewButton.innerHTML = '<ion-icon style="color:orangered;margin-right:5px;" name="eye-outline"></ion-icon><span style="color:orangered;font-weight:lighter;">View Bookings<span>';
+    }
+  }
+  
 
   updateBus(bus: any) {
     this.router.navigate(['/add-bus'], { state: { bus } });

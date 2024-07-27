@@ -98,8 +98,10 @@ export class BookPage implements OnInit {
       try {
         await this.dataService.updateBusSeats(matchedBus.id, updatedSeats);
 
+        const bookingRef = this.dataService.createBookingRef();
         // Add booking data
         const bookingData = {
+          id: bookingRef.ref.id,
           time: this.time,
           residence: this.residence,
           busNumber: matchedBus.busNumber,
@@ -108,7 +110,7 @@ export class BookPage implements OnInit {
           studentNumber: this.userData.studentNumber, 
         };
 
-        await this.dataService.addBooking(bookingData);
+        await this.dataService.addBooking(bookingRef,bookingData);
         this.nav();
         console.log('Booking successfully added!');
       } catch (error) {

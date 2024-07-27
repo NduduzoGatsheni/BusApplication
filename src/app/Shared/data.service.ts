@@ -8,15 +8,38 @@ import { Bus } from '../Mode/bus.model';
   providedIn: 'root'
 })
 export class DataService {
+  presentToast(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
 
   private busesCollection: AngularFirestoreCollection<Bus>;
 
   constructor(private firestore: AngularFirestore) {
     this.busesCollection = this.firestore.collection<Bus>('buses');
   }
+  createBookingRef() {
+    return this.firestore.collection('booked').doc(); // Generates a unique document reference
+  }
+  // addBooking(data: any) {
+  //   return this.firestore.collection('booked').add(data);
+  // }
+ async addBooking(bookingRef: any, bookingData: any) {
+    return bookingRef.set(bookingData);
+  }
 
-  addBooking(data: any) {
-    return this.firestore.collection('booked').add(data);
+
+  deleteBus(busId: any): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.firestore.collection('booked').doc(busId).delete()
+        .then(() => {
+          console.log('Bus successfully deleted');
+          resolve();
+        })
+        .catch((error) => {
+          console.error('Error deleting bus: ', error);
+          reject(error);
+        });
+    });
   }
 
   updateBusSeats(busId: string, seats: number) {
@@ -89,5 +112,17 @@ export class DataService {
       .collection('buses')
       .doc(busId)
       .update({ time: newTime });
+  }
+
+  getBookedDataByResidence(residence: string): Observable<Bus[]> {
+    return this.firestore.collection('booked', ref => ref.where('residence', '==', residence))
+      .snapshotChanges()
+      .pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as Bus;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        }))
+      );
   }
 }
