@@ -95,6 +95,8 @@ import { Bus } from '../Mode/bus.model';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { UserService } from '../Shared/user.service';
+// import { DataService } from '../Shared/data.service';
 
 @Component({
   selector: 'app-tab1',
@@ -103,7 +105,7 @@ import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operato
   providers: [DatePipe]
 })
 export class Tab1Page implements OnInit {
-  
+  userData: any = {};
   searchQuery: string = '';
   private searchTerms = new Subject<string>();
 
@@ -114,10 +116,16 @@ export class Tab1Page implements OnInit {
   constructor(
     private dataService: DataService, 
     private datePipe: DatePipe,  
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    const email = this.userService.getCurrentUserEmail();
+    if (email) {
+      this.userData = await this.userService.getUserData(email);
+    }
+    
     this.fetchBuses();
     setInterval(() => {
       this.updateCurrentTime();

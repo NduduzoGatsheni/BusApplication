@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ToastController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private currentUserEmail!: string;
+  private currentUserEmail: string ='nduduzondlovu635@gmail.com';
 
-  constructor(private db: AngularFirestore,private toastController: ToastController) {}
+  constructor(private db: AngularFirestore,private toastController: ToastController,private afAuth: AngularFireAuth) {}
 
-  setCurrentUserEmail(email: string) {
+  setCurrentUserEmail(email: string = 'nduduzondlovu635@gmail.com' ) {
     this.currentUserEmail = email;
   }
   async presentToast(message: string, duration: number = 2000, position: 'top' | 'middle' | 'bottom' = 'bottom') {
@@ -29,7 +30,9 @@ export class UserService {
   
     await toast.present();
   }
-
+  logout() {
+    return this.afAuth.signOut();
+  }
   getCurrentUserEmail() {
     return this.currentUserEmail;
   }
@@ -48,4 +51,9 @@ export class UserService {
       return null;
     }
   }
+
+  validateEmail(email: string): boolean {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailRegex.test(email)
+}
 }

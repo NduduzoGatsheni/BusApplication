@@ -66,7 +66,15 @@ export class LoginPage {
 
     this.login();
   }
-
+async toast(message:string,color:string){
+  const toast = await this.toastController.create({
+    message: message,
+    duration: 2000,
+    color: color
+  });
+  toast.present();
+  return;
+}
   async login() {
     this.passwordError = null;
 
@@ -83,9 +91,11 @@ export class LoginPage {
           this.userService.setCurrentUserEmail(this.email);
           
         if(this.email === "admin.mutbuses@gmail.com"){
+          this.toast('Successfully logged in','success')
           this.navCtrl.navigateForward("/dashboard");
         }
         else{
+          this.toast('Successfully logged in','success')
           this.navCtrl.navigateForward("/tabs/tab1");
         }
        }
@@ -101,6 +111,7 @@ export class LoginPage {
           });
           toast.present();
         } else if (errorMessage.includes("auth/invalid-email")) {
+         
           alert("Incorrectly formatted email");
         }
       });

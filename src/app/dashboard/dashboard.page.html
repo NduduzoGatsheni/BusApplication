@@ -10,9 +10,29 @@
     <ion-icon name="arrow-back-outline" [routerLink]="['/login']"></ion-icon>
     <h3 class="time">{{ currentTime }}</h3>
     <div>
-      <ion-icon name="megaphone-outline" (click)="presentAlert()"></ion-icon>
+    
+      <!-- <ion-button (click)="logout()" color="danger" expand="full">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Logout
+      </ion-button> -->
 
-        <ion-icon name="menu-outline" slot="end"></ion-icon>
+        <ion-icon id="auto-trigger" name="menu-outline" slot="end"></ion-icon>
+        <ion-popover trigger="auto-trigger" size="auto">
+        <ng-template>
+        <ion-content class="ion-padding">
+         <ion-list>
+         <ion-item (click)="presentAlert()" class="item">
+          <ion-icon name="megaphone-outline"  slot="end"></ion-icon>
+           Announcement
+         </ion-item>
+         <ion-item class="item" style="color:red">
+          <ion-icon style="color:red" id="auto-trigger" (click)="logout()" name="log-out-outline" slot="end"></ion-icon>
+          LogOut
+         </ion-item>
+        </ion-list>
+        </ion-content>
+        </ng-template>
+        </ion-popover>
     </div>
 </div>
    <div class="s_container">

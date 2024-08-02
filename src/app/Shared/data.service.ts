@@ -8,10 +8,6 @@ import { Bus } from '../Mode/bus.model';
   providedIn: 'root'
 })
 export class DataService {
-  presentToast(arg0: string) {
-    throw new Error('Method not implemented.');
-  }
-
   private busesCollection: AngularFirestoreCollection<Bus>;
 
   constructor(private firestore: AngularFirestore) {
@@ -20,9 +16,7 @@ export class DataService {
   createBookingRef() {
     return this.firestore.collection('booked').doc(); // Generates a unique document reference
   }
-  // addBooking(data: any) {
-  //   return this.firestore.collection('booked').add(data);
-  // }
+
  async addBooking(bookingRef: any, bookingData: any) {
     return bookingRef.set(bookingData);
   }
@@ -91,6 +85,22 @@ export class DataService {
     return this.busesCollection.doc(bus.id).update(bus);
   }
 
+  // async updateBusMessage(alertMessage: string, uid: string): Promise<void> {
+  //   if (!uid) {
+  //     throw new Error('User ID is required');
+  //   }
+
+  //   const busMessageRef = this.firestore.collection("buses").doc(uid);
+
+  //   try {
+  //     await busMessageRef.set({ message: alertMessage }, { merge: true });
+  //     console.log('Bus message updated successfully in Firestore');
+  //   } catch (error) {
+  //     console.error('Error updating bus message:', error);
+  //     throw error;
+  //   }
+  // }
+
   getLocation(): Observable<string> {
     // Replace 'locationId' with your actual document ID or logic to retrieve the location
     return this.firestore.collection('Location').doc('HWNucqq8dYD4H5gCp5V8').valueChanges()
@@ -125,4 +135,53 @@ export class DataService {
         }))
       );
   }
+// Update buses collection
+updateBusesCollection(alertMessage: string, residence: string): Promise<void> {
+  return this.firestore.collection('buses', ref => ref.where('residence', '==', residence)).get()
+    .toPromise()
+    .then(snapshot => {
+      if (!snapshot || snapshot.empty) {
+        return;
+      }
+      const updatePromises = snapshot.docs.map(doc => {
+        return this.firestore.collection('buses').doc(doc.id).update({
+          message: alertMessage
+        });
+      });
+      return Promise.all(updatePromises).then(() => {});
+    });
+}
+
+// Update booked collection
+updateBookedCollection(alertMessage: string, residence: string): Promise<void> {
+  return this.firestore.collection('booked', ref => ref.where('residence', '==', residence)).get()
+    .toPromise()
+    .then(snapshot => {
+      if (!snapshot || snapshot.empty) {
+        return;
+      }
+      const updatePromises = snapshot.docs.map(doc => {
+        return this.firestore.collection('booked').doc(doc.id).update({
+          message: alertMessage
+        });
+      });
+      return Promise.all(updatePromises).then(() => {});
+    });
+}
+
+cancelBooking(uid: string) {
+
+  if(!uid){
+    alert("The booking details doesnot exists");
+    return;
+  }
+  const docRef = this.firestore.collection('booked').doc(uid);
+  docRef.delete().then(() => {
+    console.log(`Booking with UID ${uid} has been successfully canceled.`);
+  }).catch(error => {
+    console.error(`Error canceling booking with UID ${uid}: `, error);
+  });
+}
+
+
 }

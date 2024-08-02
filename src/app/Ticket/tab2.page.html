@@ -14,6 +14,6 @@
     <ion-label>Route: </ion-label>  <ion-label>{{ bus.residence }} </ion-label><hr/>
     <ion-label>Bus Booked:  </ion-label> <ion-label> {{ bus.busNumber }}</ion-label><hr/>
     <ion-label>Message:  </ion-label> <ion-label> {{ bus?.message }}</ion-label><hr/>
-    <ion-button fill="block" style="margin-bottom:10px;"   onClick="cancelBooking()">Cancel</ion-button>
+    <ion-button fill="block" style="margin-bottom:10px;color:red;display: flex;justify-content: center;align-items:center;" color="danger"  (click)='presentAlert(bus?.id)'><ion-icon name="trash-outline"></ion-icon>Cancel Booking</ion-button>
   </div>
 </ion-content>

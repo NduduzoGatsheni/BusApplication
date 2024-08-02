@@ -18,7 +18,8 @@
       
         <ion-label position="floating">Confirm Password</ion-label>
         <ion-input type="password" [(ngModel)]="confirmPassword"></ion-input>
-     <div class="buttons"><ion-button expand="full">Login</ion-button>
+     <div class="buttons"><ion-button expand="full" [routerLink]="['/login']">Login</ion-button>
+
       <ion-button expand="full" (click)="register()">Register</ion-button>
     </div> <!-- <div class="links">
         <span>Forgot Password?</span><a href="#" (click)="forgotPassword()">Click Here</a>

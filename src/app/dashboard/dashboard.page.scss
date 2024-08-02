@@ -163,7 +163,16 @@ img{
     --background: orangered;
     background-color: orangered; 
   }
-
+.item{
+    cursor: pointer ;
+}
+.item:hover {
+    color: greenyellow;
+  }
+  
+  .item:hover ion-icon {
+    color: greenyellow;
+  }
 
   @media (min-width: 768px) {
     .my-container ion-card {

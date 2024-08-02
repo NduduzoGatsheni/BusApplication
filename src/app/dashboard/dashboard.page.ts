@@ -145,7 +145,8 @@ import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
-
+import { UserService } from '../Shared/user.service';  // Your authentication service
+// import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -163,7 +164,8 @@ export class DashboardPage implements OnInit {
     private dataService: DataService,
     private datePipe: DatePipe,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private authService: UserService
   ) { }
 
   ngOnInit() {
@@ -189,6 +191,7 @@ export class DashboardPage implements OnInit {
     });
   }
 
+  
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Make An Announcement',
@@ -235,7 +238,6 @@ export class DashboardPage implements OnInit {
       // If the search term is empty, return the original buses$
       return this.buses$;
     } else {
-      // Filter based on residence
       return this.buses$.pipe(
         map((buses: Bus[]) =>
           buses.filter(bus =>
@@ -376,7 +378,11 @@ export class DashboardPage implements OnInit {
     }
   }
 
-
+  logout() {
+    this.authService.logout().then(() => {
+      this.router.navigate(['/login']);
+    });
+  }
 
 
   async navigate(bus: any) {

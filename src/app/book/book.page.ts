@@ -25,6 +25,7 @@ export class BookPage implements OnInit {
   busNumber: any;
   totalSeats: any;
   buttonText: string | undefined;
+  message:string='';
 
   constructor(private dataService: DataService,
               private userService: UserService,
@@ -36,7 +37,7 @@ export class BookPage implements OnInit {
     this.fetchBusData();
     const email = this.userService.getCurrentUserEmail();
     if (email) {
-      alert(email);
+      // alert(email);
       this.getUserData(email);
     }
     
@@ -49,7 +50,7 @@ export class BookPage implements OnInit {
       this.residence = this.bus.residence;
       this.time = this.bus.time;
       this.totalSeats = this.bus.totalSeats;
-
+      this.message = this.bus.message;
       this.buttonText = 'Update'; // Change button text to 'Update'
     }
 
@@ -108,6 +109,7 @@ export class BookPage implements OnInit {
           email: this.userData.email,
           fullName: this.userData.fullName,
           studentNumber: this.userData.studentNumber, 
+          message: this.message
         };
 
         await this.dataService.addBooking(bookingRef,bookingData);

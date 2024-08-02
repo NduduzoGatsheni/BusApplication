@@ -35,3 +35,19 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* src/global.scss or src/theme/variables.scss */
+.cancel-button {
+    --color: white;  /* Text color */
+    --background: green; /* Background color */
+    --border-radius: 4px; /* Optional: Button border radius */
+    --padding: 10px; /* Optional: Button padding */
+  }
+  
+  .danger-button {
+    --color: white;  /* Text color */
+    --background: red; /* Background color */
+    --border-radius: 4px; /* Optional: Button border radius */
+    --padding: 10px; /* Optional: Button padding */
+  }
+  

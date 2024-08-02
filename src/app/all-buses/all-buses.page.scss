@@ -86,3 +86,10 @@ padding: 15px;
   font-weight:bold;
   color:rgb(224, 0, 101);
 }
+
+.cancel-button{
+ --color:green !important;
+}
+.danger-button{
+--color:red !important;
+}

@@ -4,10 +4,10 @@
 
 <ion-item class="header">
   <ion-icon name="arrow-back-outline" [routerLink]="['/login']"></ion-icon>
-  <!-- <ion-icon name="notifications-outline" *ngIf="(buses$ | async)" (click)="navigateToNotifications(buses$ | async)" slot="end"></ion-icon> -->
+
+  <ion-label style="font-weight: bold;color:black">{{ userData.fullName }}</ion-label>
   <ion-icon name="notifications-outline" (click)="navigateToNotifications()" slot="end"></ion-icon>
-    <!-- <ion-icon name="notifications-outline" *ngIf="(buses$)" (click)="navigateToNotifications(bus)" slot="end"></ion-icon> -->
-</ion-item>
+   </ion-item>
 <ion-content fullscreen color="light">
 <div class="search_container">
     <h3 class="time">{{ currentTime }}</h3>

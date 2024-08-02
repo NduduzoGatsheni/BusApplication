@@ -21,6 +21,8 @@ export class AllBusesPage implements OnInit {
   time: any;
   totalSeats: any;
 
+
+
 filteredBookings = [...this.busData];
 
   constructor(   private alertController: AlertController,private dataService: DataService,private userService: UserService, private router: Router) { }
@@ -70,26 +72,18 @@ ngOnInit() {
       const lastName = nameParts.slice(1).join(' ') || '';
       return { firstName, lastName };
     }
-  
-
 
 filterBookings(event: any) {
   const searchTerm = event.target.value.toLowerCase();
+  let searchTermNumber = 0;
+  if (!isNaN(searchTerm) && searchTerm.trim() !== '') {
+      searchTermNumber = Number(searchTerm);
+  }
   this.filteredBookings = this.busData.filter(booking => 
-    booking.studentNumber == searchTerm ||
+    booking?.studentNumber === searchTermNumber ||
     booking.fullName?.toLowerCase().includes(searchTerm)
   );
 }
-
-
-//   deleteBus(bus: Bus) {
-//     const index = this.busData.findIndex(b => b.id === bus.id);
-//     if (index !== -1) {
-//       this.busData.splice(index, 1);
-//       this.filteredBookings = [...this.busData];
-//     }
-//   }
-// }
 
 async deleteBus(bus: Bus) {
   try {
@@ -105,415 +99,122 @@ async deleteBus(bus: Bus) {
   }
 }
 
-async presentAlert(data:any) {
-      const alert = await this.alertController.create({
-        header: 'Delete Student Ticket',
-        message: data.fullName,
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: () => {
-              console.log('Deletion cancelled');
-            }
-          },
-          {
+async presentAlert(data: any) {
+  const alert = await this.alertController.create({
+    header: 'Delete Student Ticket',
+    message: data.fullName,
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'cancel-button',
+        handler: () => {
+          console.log('Deletion cancelled');
+        }
+      },
+      {
         text: 'Delete',
-        cssClass: 'danger',
-        // color:'red'
+        cssClass: 'danger-button',
         handler: () => {
           this.deleteBus(data);
         }
-          }
-        ]
-      });
-  
-      await alert.present();
-    }
-
-
+      }
+    ]
+  });
+  await alert.present();
 }
 
 
-// loadMoreBookings(event:any) {
-//   // Simulate loading more bookings
-//   setTimeout(() => {
-//     const newBookings = this.busData;
-//     //  [
-//     //   { studentNumber: '22022014', fullName: 'Alice Johnson', time: '10:00' },
-//     //   { studentNumber: '22022015', fullName: 'Bob Williams', time: '10:00' },
-//     // ];
-//     this.busData.push(...newBookings);
-//     this.filteredBookings = [...this.busData];
-//     event.target.complete();
 
-//     // Disable infinite scroll if all data is loaded
-//     if (this.busData.length >= 50) {
-//       event.target.disabled = true;
-//     }
-//   }, 1000);
-// }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//-------------------------from here-------------------
-// import { Component, ViewChild, OnInit } from '@angular/core';
-// import { IonInfiniteScroll, AlertController } from '@ionic/angular';
-
-
-// @Component({
-//   selector: 'app-all-buses',
-//   templateUrl: './all-buses.page.html',
-//   styleUrls: ['./all-buses.page.scss'],
-// })
-// export class AllBusesPage implements OnInit {
-
-//   @ViewChild(IonInfiniteScroll)
-//   // infiniteScroll!: IonInfiniteScroll;
-
-//   title = 'MUT TO LONSDALE';
-//   timeRange = '10:00 - 10:30';
-//   busNumber = '';
-//   bookings = [
-//     { studentNumber: '22022011', name: 'Nkululeko Mgadi', time: '10:00 - 10:30' },
-//     { studentNumber: '22022012', name: 'John Doe', time: '10:00 - 10:30' },
-//     { studentNumber: '22022013', name: 'Jane Smith', time: '10:00 - 10:30' },
-//   ];
-//   filteredBookings = [...this.bookings];
-//   page = 1;
-
-//   constructor(private alertController: AlertController) {}
-//   ngOnInit(){
-
-//   }
-    
-  
-
-//   editBusNumber() {
-//     this.presentBusNumberAlert();
-//   }
-
-//   async presentBusNumberAlert() {
-//     const alert = await this.alertController.create({
-//       header: 'Edit Bus Number',
-//       inputs: [
-//         {
-//           name: 'busNumber',
-//           type: 'text',
-//           placeholder: 'Enter bus number',
-//           value: this.busNumber
-//         }
-//       ],
-//       buttons: [
-//         {
-//           text: 'Cancel',
-//           role: 'cancel'
-//         },
-//         {
-//           text: 'Save',
-//           handler: (data) => {
-//             this.busNumber = data.busNumber;
-//           }
-//         }
-//       ]
-//     });
-
-//     await alert.present();
-//   }
-
-//   filterBookings(event: any) {
-//     const searchTerm = event.target.value.toLowerCase();
-//     this.filteredBookings = this.bookings.filter(booking => 
-//       booking.studentNumber.toLowerCase().includes(searchTerm) ||
-//       booking.name.toLowerCase().includes(searchTerm)
-//     );
-//   }
-
-  // loadMoreBookings(event:any) {
-  //   // Simulate loading more bookings
-  //   setTimeout(() => {
-  //     const newBookings = [
-  //       { studentNumber: '22022014', name: 'Alice Johnson', time: '10:00 - 10:30' },
-  //       { studentNumber: '22022015', name: 'Bob Williams', time: '10:00 - 10:30' },
-  //     ];
-  //     this.bookings.push(...newBookings);
-  //     this.filteredBookings = [...this.bookings];
-  //     event.target.complete();
-
-  //     // Disable infinite scroll if all data is loaded
-  //     if (this.bookings.length >= 50) {
-  //       event.target.disabled = true;
-  //     }
-  //   }, 1000);
-  // }
-
-//   async addBooking() {
-//     const alert = await this.alertController.create({
-//       header: 'Add New Booking',
-//       inputs: [
-//         {
-//           name: 'studentNumber',
-//           type: 'text',
-//           placeholder: 'Student Number'
-//         },
-//         {
-//           name: 'name',
-//           type: 'text',
-//           placeholder: 'Name'
-//         }
-//       ],
-//       buttons: [
-//         {
-//           text: 'Cancel',
-//           role: 'cancel'
-//         },
-//         {
-//           text: 'Add',
-//           handler: (data) => {
-//             const newBooking = {
-//               studentNumber: data.studentNumber,
-//               name: data.name,
-//               time: this.timeRange
-//             };
-//             this.bookings.unshift(newBooking);
-//             this.filteredBookings = [...this.bookings];
-//           }
-//         }
-//       ]
-//     });
-
-//     await alert.present();
-//   }
-// }
-
-// --------------------ends here
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { Component, OnInit, ViewChild } from '@angular/core';
-// import { DataService } from '../Shared/data.service';
-// import { Observable } from 'rxjs';
-// import { Bus } from '../Mode/bus.model';
-// import { Router } from '@angular/router';
-// import { IonInfiniteScroll, AlertController } from '@ionic/angular';
-
-// @Component({
-//   selector: 'app-all-buses',
-//   templateUrl: './all-buses.page.html',
-//   styleUrls: ['./all-buses.page.scss'],
-// })
-// export class AllBusesPage implements OnInit {
-//   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll | undefined;
-
-//   busData$!: Observable<Bus[]>;
-//   busData: Bus[] = [];
-//   filteredBusData: Bus[] = [];
-//   bus: any;
-//   uid: any;
-//   busNumber: any;
-//   residence: any;
-//   time: any;
-//   totalSeats: any;
-//   page = 1;
-
-//   constructor(
-//     private dataService: DataService, 
-//     private router: Router,
-//     private alertController: AlertController
-//   ) { }
-
-//   ngOnInit() {
-//     const navigation = this.router.getCurrentNavigation();
-
-//     if (navigation?.extras.state?.['bus']) {
-//       this.bus = navigation.extras.state['bus'];
-//       this.uid = this.bus.id;
-//       this.busNumber = this.bus.busNumber;
-//       this.residence = this.bus.residence;
-//       this.time = this.bus.time;
-//       this.totalSeats = this.bus.totalSeats;
-//     }
-
-//     this.fetchBookedData();
-//   }
-
-//   fetchBookedData() {
-//     this.busData.splice(0, this.busData.length);
-
-//     if (this.residence) {
-//       this.busData$ = this.dataService.getBookedDataByResidence(this.residence);
-//       this.busData$.subscribe(data => {
-//         this.busData = data;
-//         this.filteredBusData = [...this.busData];
+async present() {
+  const alert = await this.alertController.create({
+    header: 'Make An Announcement',
+    inputs: [
+      {
+        name: 'alertMessage',
+        type: 'text',
+        placeholder: 'Enter your announcement message',
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {
+          console.log('Alert canceled');
+        },
+      },
+      {
+        text: 'Submit',
+        handler: (data) => {
+          this.submitAnnouncement(data.alertMessage,this.bus.residence);
+          console.log('Alert message:', data.alertMessage);
+        },
+      },
+    ],
+  });
+  await alert.present();
+}
+
+// submitAnnouncement(alertMessage: string,residence: string) {
+//   if (alertMessage) {
+//     this.dataService.updateBusMessage(alertMessage,residence)
+//     .then(() => {
+//         console.log('Announcement updated successfully');
+//       }) 
+//       .catch((error:any) => {
+//         console.error('Error updating announcement:', error);
 //       });
-//     }
-//   }
-
-//   filterBusData(event: any) {
-//     const searchTerm = event.target.value.toLowerCase();
-//     this.filteredBusData = this.busData.filter(bus => 
-//       bus.busNumber.toLowerCase().includes(searchTerm) ||
-//       bus.residence.toLowerCase().includes(searchTerm)
-//     );
-//   }
-
-//   loadMoreBuses(event:any) {
-//     // Simulate loading more buses
-//     setTimeout(() => {
-//       // Here you would typically fetch more data from your service
-//       // For demonstration, we'll just add dummy data
-//       const newBuses = [
-//         { id: 'new1', busNumber: 'B001', residence: 'New Residence', time: '11:00', totalSeats: 50 },
-//         { id: 'new2', busNumber: 'B002', residence: 'Another Residence', time: '12:00', totalSeats: 45 },
-//       ];
-//       this.busData.push(...newBuses);
-//       this.filteredBusData = [...this.busData];
-//       event.target.complete();
-
-//       // Disable infinite scroll if all data is loaded
-//       if (this.busData.length >= 50) {
-//         event.target.disabled = true;
-//       }
-//     }, 1000);
-//   }
-
-//   async addBus() {
-//     const alert = await this.alertController.create({
-//       header: 'Add New Bus',
-//       inputs: [
-//         {
-//           name: 'busNumber',
-//           type: 'text',
-//           placeholder: 'Bus Number'
-//         },
-//         {
-//           name: 'residence',
-//           type: 'text',
-//           placeholder: 'Residence'
-//         },
-//         {
-//           name: 'time',
-//           type: 'time',
-//           placeholder: 'Time'
-//         },
-//         {
-//           name: 'totalSeats',
-//           type: 'number',
-//           placeholder: 'Total Seats'
-//         }
-//       ],
-//       buttons: [
-//         {
-//           text: 'Cancel',
-//           role: 'cancel'
-//         },
-//         {
-//           text: 'Add',
-//           handler: (data) => {
-//             const newBus: Bus = {
-//               id: Date.now().toString(), // Generate a temporary ID
-//               busNumber: data.busNumber,
-//               residence: data.residence,
-//               time: data.time,
-//               totalSeats: data.totalSeats
-//             };
-//             this.busData.unshift(newBus);
-//             this.filteredBusData = [...this.busData];
-//             // Here you would typically call a service method to add the bus to your backend
-//             // this.dataService.addBus(newBus);
-//           }
-//         }
-//       ]
-//     });
-
-//     await alert.present();
-//   }
-
-//   async editBusNumber(bus: Bus) {
-//     const alert = await this.alertController.create({
-//       header: 'Edit Bus Number',
-//       inputs: [
-//         {
-//           name: 'busNumber',
-//           type: 'text',
-//           value: bus.busNumber,
-//           placeholder: 'New Bus Number'
-//         }
-//       ],
-//       buttons: [
-//         {
-//           text: 'Cancel',
-//           role: 'cancel'
-//         },
-//         {
-//           text: 'Save',
-//           handler: (data) => {
-//             const index = this.busData.findIndex(b => b.id === bus.id);
-//             if (index !== -1) {
-//               this.busData[index].busNumber = data.busNumber;
-//               this.filteredBusData = [...this.busData];
-//               // Here you would typically call a service method to update the bus in your backend
-//               // this.dataService.updateBus(bus.id, { busNumber: data.busNumber });
-//             }
-//           }
-//         }
-//       ]
-//     });
-
-//     await alert.present();
-//   }
-
-//   deleteBus(bus: Bus) {
-//     const index = this.busData.findIndex(b => b.id === bus.id);
-//     if (index !== -1) {
-//       this.busData.splice(index, 1);
-//       this.filteredBusData = [...this.busData];
-//       // Here you would typically call a service method to delete the bus from your backend
-//       // this.dataService.deleteBus(bus.id);
-//     }
-//   }
-
-//   splitFullName(fullName: string): { firstName: string, lastName: string } {
-//     const nameParts = fullName.split(' ');
-//     const firstName = nameParts[0] || '';
-//     const lastName = nameParts.slice(1).join(' ') || '';
-//     return { firstName, lastName };
+//   } else {
+//     console.error('Announcement message is empty');
 //   }
 // }
+// submitAnnouncement(alertMessage: string, residence: string) {
+//   if (alertMessage) {
+//     // Query all records with the specified residence
+//     this.dataService.getRecordsByResidence(residence)
+//       .then((records: any[]) => {
+//         const updatePromises = records.map(record => {
+//           return this.dataService.updateBusMessage(record.id, alertMessage)
+//             .then(() => {
+//               console.log(`Announcement updated successfully for record ID: ${record.id}`);
+//             })
+//             .catch((error: any) => {
+//               console.error(`Error updating announcement for record ID: ${record.id}`, error);
+//             });
+//         });
+//         return Promise.all(updatePromises);
+//       })
+//       .then(() => {
+//         console.log('All announcements updated successfully');
+//       })
+//       .catch((error: any) => {
+//         console.error('Error updating announcements:', error);
+//       });
+//   } else {
+//     console.error('Announcement message is empty');
+//   }
+// }
+
+submitAnnouncement(alertMessage: string, residence: string) {
+  if (alertMessage) {
+    // Update message in buses collection
+    this.dataService.updateBusesCollection(alertMessage, residence)
+      .then(() => {
+        // Update message in booked collection
+        return this.dataService.updateBookedCollection(alertMessage, residence);
+      })
+      .then(() => {
+        console.log('All announcements updated successfully in both collections');
+      })
+      .catch((error: any) => {
+        console.error('Error updating announcements:', error);
+      });
+  } else {
+    console.error('Announcement message is empty');
+  }
+}
+
+
+}

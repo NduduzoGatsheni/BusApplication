@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Bus } from '../Mode/bus.model';
 import { DataService } from '../Shared/data.service';
 import { UserService } from '../Shared/user.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -17,18 +18,50 @@ export class Tab2Page implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private userService: UserService
+    private userService: UserService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
     this.currentUserEmail = this.userService.getCurrentUserEmail();
-
     if (this.currentUserEmail) {
-      // alert("my is marasha");
       this.fetchBusData();
     }
   }
+  cancelBooking(uid?:string){
+    
+    if(uid){
+       this.dataService.cancelBooking(uid);
+    }
+    else{
+      alert('Delete was unsuccessfully');
+    }
+  }
 
+  async presentAlert(uid?:string) {
+    const alert = await this.alertController.create({
+      header: 'Cancel Ride',
+      message: 'Are you sure you want to cancel the ride',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'cancel-button',
+          handler: () => {
+            console.log('Deletion cancelled');
+          }
+        },
+        {
+          text: 'Yes',
+          cssClass: 'danger-button',
+          handler: () => {
+            this.cancelBooking(uid);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
   fetchBusData() {
     this.busData$ = this.dataService.getTicketData().pipe(
       map((actions: any[]) => actions.map((a: { payload: { doc: { data: () => Bus; id: any; }; }; }) => {
@@ -41,6 +74,7 @@ export class Tab2Page implements OnInit {
 
     this.busData$.subscribe(data => {
       this.busData = data;
+      alert(JSON.stringify(this.busData));
     });
   }
 }
