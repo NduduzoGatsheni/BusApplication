@@ -38,55 +38,82 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {}
 
-  registerStudents() {
-    const studentData = {
-      studentNumber: this.studentNumber,
-      fullName: this.fullName,
-      email: this.email,
-      password: this.password,
-    };
+  // registerStudents() {
+  //   const studentData = {
+  //     studentNumber: this.studentNumber,
+  //     fullName: this.fullName,
+  //     email: this.email,
+  //     password: this.password,
+  //   };
 
-    this.firestoreService.addStudent(studentData)
-      .then(() => {
-        console.log('Student successfully added!');
-      })
-      .catch(error => {
-        console.error('Error adding student: ', error);
-      });
-  }
+  //   this.firestoreService.addStudent(studentData)
+  //     .then(() => {
+  //       console.log('Student successfully added!');
+  //     })
+  //     .catch(error => {
+  //       console.error('Error adding student: ', error);
+  //     });
+  // }
 
  async register() {
   
-
+if(!this.confirmPassword ||!this.password|| !this.email||!this.fullName||!this. studentNumber)
+  {
+    this.presentMessage('failed','All fields are required');
+    return;
+  }
+if(this.confirmPassword != this.password){
+  this.presentMessage('failed','Pasword does not match');
+  return;
+}
     const loading = await this.loadingController.create({
       message: 'Registering...',
     });
     await loading.present();
-    // alert("Valid");
     this.auth.createUserWithEmailAndPassword(this.email, this.password)
       .then(async (userCredential: { user: any; }) => {
         await loading.dismiss();
         if (userCredential.user) {
           await this.firestore.collection('registeredStudents').add({
             studentNumber: this.studentNumber,
-      fullName: this.fullName,
-      email: this.email,
-      password: this.password
+            fullName: this.fullName,
+             email: this.email,
+             password: this.password
           });
-          // this.registerStudents();
+          
           this.navController.navigateForward("login");
         } else {
-          alert('User not found');
+          this.toast('User not found','danger');
         }
       })
       .catch((error: { message: any; code: string; }) => {
         loading.dismiss();
         const errorMessage = error.message;
         if (error.code === 'auth/email-already-in-use') {
-          alert('This email is already in use. Please use a different email.');
+          this.presentMessage('','This email is already in use. Please use a different email.');
         } else {
           alert(errorMessage);
         }
       });
+  }
+
+  async toast(message:string,color:string){
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color,
+      position: 'top'
+    });
+    toast.present();
+    return;
+  }
+  async presentMessage(header: string ='Message', message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }

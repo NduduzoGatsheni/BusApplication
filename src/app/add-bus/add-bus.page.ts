@@ -74,7 +74,7 @@ export class AddBusPage implements OnInit {
       .then(() => {
         console.log('Bus successfully updated!');
         alert('Bus successfully updated!');
-        // this.router.navigate(['/bus-list']); // Navigate to bus list or another appropriate page
+        this.router.navigate(['/dashboard']); // Navigate to bus list or another appropriate page
       })
       .catch(error => {
         console.error('Error updating bus: ', error);

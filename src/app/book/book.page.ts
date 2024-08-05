@@ -4,9 +4,8 @@ import { map, Observable } from 'rxjs';
 import { Bus } from '../Mode/bus.model';
 import { UserService } from '../Shared/user.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
-
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-book',
   templateUrl: './book.page.html',
@@ -31,6 +30,8 @@ export class BookPage implements OnInit {
               private userService: UserService,
               private db: AngularFirestore,
             private navCtrl: NavController,
+            private alertController: AlertController,
+            private toastController: ToastController,
             private router: Router) {}
 
   ngOnInit() {
@@ -115,11 +116,34 @@ export class BookPage implements OnInit {
         await this.dataService.addBooking(bookingRef,bookingData);
         this.nav();
         console.log('Booking successfully added!');
+        this.toast('Booking successfully added!','success');
+
       } catch (error) {
         console.error('Error updating bus seats or adding booking: ', error);
+        this.toast('Error updating bus seats or adding booking:','danger');
       }
     } else {
       console.log('No available seats or bus not found');
+      this.presentMessage('Notification','No available seats or bus not found');
     }
+  }
+  async toast(message:string,color:string){
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color,
+       position: 'top'
+    });
+    toast.present();
+    return;
+  }
+  async presentMessage(header: string ='Message', message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }

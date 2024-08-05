@@ -235,7 +235,6 @@ export class DashboardPage implements OnInit {
 
   searchBusesInArray(residence: string): Observable<Bus[]> {
     if (residence.trim() === '') {
-      // If the search term is empty, return the original buses$
       return this.buses$;
     } else {
       return this.buses$.pipe(

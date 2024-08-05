@@ -97,6 +97,8 @@ import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 import { UserService } from '../Shared/user.service';
 // import { DataService } from '../Shared/data.service';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-tab1',
@@ -112,20 +114,24 @@ export class Tab1Page implements OnInit {
   buses$: Observable<Bus[]> = of([]);
   currentTime: string = '';
   allBuses: Bus[] = []; // Store the array here
-
+  announcement:string='';
   constructor(
     private dataService: DataService, 
     private datePipe: DatePipe,  
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private alertController: AlertController,
+    private toastController: ToastController,
+    private firestore: AngularFirestore
   ) {}
 
   async ngOnInit() {
     const email = this.userService.getCurrentUserEmail();
+    this.announcements();
+
     if (email) {
       this.userData = await this.userService.getUserData(email);
     }
-    
     this.fetchBuses();
     setInterval(() => {
       this.updateCurrentTime();
@@ -140,7 +146,17 @@ export class Tab1Page implements OnInit {
       this.allBuses = filteredBuses; // Store filtered buses
     });
   }
-
+  announcements() {
+    this.firestore.collection("Announcement").doc("announcement4all").valueChanges().subscribe((data: any) => {
+      if (data) {
+        this.announcement = data.announcement;
+        if(this.announcement){
+          this.toast(this.announcement,'warning');
+        }
+        
+      }
+    });
+  }
   clearSearch() {
     this.searchQuery = '';
     this.fetchBuses();
@@ -182,4 +198,25 @@ export class Tab1Page implements OnInit {
   navigateToNotifications() {
     this.router.navigate(['/notifications'], { state: { buses: this.allBuses } });
   }
+
+  async presentMessage(header: string ='Message', message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+  async toast(message:string,color:string){
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 10000,
+      color: color,
+      position: 'middle'
+    });
+    toast.present();
+    return;
+  }
+
 }

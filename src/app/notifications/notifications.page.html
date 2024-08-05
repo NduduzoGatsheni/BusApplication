@@ -1,11 +1,16 @@
 <ion-content>
   <div class="top-div">
     <ion-icon name="arrow-back-outline" [routerLink]="['/tabs/tab1']"></ion-icon>
-
-
   </div>
   <br>
   <ion-label style="font-size: 25px; font-weight: bold; color: orangered;">Notifications</ion-label>
+  
+  <ion-card style="padding:0 20px;background-color: rgb(245, 245, 245);" *ngIf="announcement">
+  <h3 style="font-weight:bold;border-bottom :1px solid orangered">For all Buses</h3>
+ 
+  <h5>{{announcement}}</h5>
+  </ion-card>
+  
   <ng-container *ngIf="!allBusesHaveNoMessages; else noMessagesTemplate">
     <ng-container *ngFor="let bus of buses">
       <ion-card class="info-container" *ngIf="bus.message">

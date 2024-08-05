@@ -4,7 +4,8 @@ import { map } from 'rxjs/operators';
 import { Bus } from '../Mode/bus.model';
 import { DataService } from '../Shared/data.service';
 import { UserService } from '../Shared/user.service';
-import { AlertController } from '@ionic/angular';
+// import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -19,7 +20,8 @@ export class Tab2Page implements OnInit {
   constructor(
     private dataService: DataService,
     private userService: UserService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastController: ToastController,
   ) { }
 
   ngOnInit() {
@@ -32,9 +34,10 @@ export class Tab2Page implements OnInit {
     
     if(uid){
        this.dataService.cancelBooking(uid);
+       this.toast('Trip is cancelled','success');
     }
     else{
-      alert('Delete was unsuccessfully');
+      this.toast('Delete was unsuccessfully','danger');
     }
   }
 
@@ -49,6 +52,7 @@ export class Tab2Page implements OnInit {
           cssClass: 'cancel-button',
           handler: () => {
             console.log('Deletion cancelled');
+            this.toast('Deletion cancelled','danger')
           }
         },
         {
@@ -74,7 +78,27 @@ export class Tab2Page implements OnInit {
 
     this.busData$.subscribe(data => {
       this.busData = data;
-      alert(JSON.stringify(this.busData));
+      
     });
+  }
+
+  async toast(message:string,color:string){
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color,
+      position: 'top'
+    });
+    toast.present();
+    return;
+  }
+  async presentMessage(header: string ='Message', message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }
